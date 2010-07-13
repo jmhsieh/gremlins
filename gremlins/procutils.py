@@ -23,12 +23,15 @@ import logging
 
 HBASE_HOME=os.getenv("HBASE_HOME", "/home/todd/monster-cluster/hbase")
 HADOOP_HOME=os.getenv("HADOOP_HOME", "/home/todd/monster-cluster/hadoop-0.20.1+169.66")
+FLUME_HOME=os.getenv("HADOOP_HOME", "/")
 LSOF=os.getenv("LSOF", "lsof")
 JPS=os.getenv("JPS", "jps")
 
 START_COMMANDS = {
   'HRegionServer': [HBASE_HOME + "/bin/hbase-daemon.sh", "start", "regionserver"],
   'DataNode': [HADOOP_HOME + "/bin/hadoop-daemon.sh", "start", "datanode"],
+  'FlumeNode': ["service","flume-node","start"],  
+  'FlumeMaster': ["service","flume-master","start"],
 }
 
 
