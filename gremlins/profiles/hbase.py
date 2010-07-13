@@ -20,13 +20,20 @@ import signal
 
 from gremlins import faults, metafaults, triggers
 
+# kill for 100s
 rs_kill_long = faults.kill_daemons(["HRegionServer"], signal.SIGKILL, 100)
+
+# kill for 3s (while master is still recovering)
 rs_kill_short = faults.kill_daemons(["HRegionServer"], signal.SIGKILL, 3)
 
+# kill for 100s
 dn_kill_long = faults.kill_daemons(["DataNode"], signal.SIGKILL, 100)
+# kill for 3s (recovery thing HDFS-1056)
 dn_kill_short = faults.kill_daemons(["DataNode"], signal.SIGKILL, 3)
 
+# simulate hbase gc and zk timeout
 rs_pause = faults.pause_daemons(["HRegionServer"], 62)
+# simulate pipeline stuff to timeout
 dn_pause = faults.pause_daemons(["DataNode"], 20)
 
 # This fault isn't that useful yet, since it only drops inbound packets
